@@ -1,11 +1,9 @@
 <?php
 
-
+use Core\App;
 use Core\Database;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
-
+$db = App::resolve(Database::class);
 
 $currentUserId = 1;
 $note = $db->query('select * from Notes where id = :id', [
@@ -13,7 +11,6 @@ $note = $db->query('select * from Notes where id = :id', [
 ])->findOrFail();
 
 authorize($note['user_id'] === $currentUserId);
-
 
 $db->query('delete from Notes where id = :id', [
   'id' => $_POST['id'],
