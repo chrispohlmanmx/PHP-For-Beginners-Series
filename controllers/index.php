@@ -1,9 +1,7 @@
 <?php
 
-$_SESSION['name'] = 'Chris';
-
+session_start();
 
 view("index.view.php", [
     'heading' => 'Home',
 ]);
-
